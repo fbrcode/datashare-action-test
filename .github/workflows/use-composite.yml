@@ -1,0 +1,11 @@
+# .github/workflows/use-composite.yml
+name: Use Composite Action
+
+on: [push]
+
+jobs:
+  call-python:
+    uses: ./.github/actions/python-runner
+    with:
+      foo: "hello"
+      bar: "world"

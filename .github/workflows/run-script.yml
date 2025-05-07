@@ -1,0 +1,31 @@
+# .github/workflows/run-script.yml
+name: 🐍 Run Python Script
+
+on:
+  workflow_dispatch:
+    inputs:
+      foo:
+        description: "First parameter (foo)"
+        required: true
+      bar:
+        description: "Second parameter (bar)"
+        required: true
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Run script.py with inputs
+        run: |
+          python script.py \
+            --foo "${{ github.event.inputs.foo }}" \
+            --bar "${{ github.event.inputs.bar }}"

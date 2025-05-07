@@ -1,0 +1,24 @@
+# .github/actions/python-runner/action.yml
+name: "python-runner"
+description: "Runs a Python script with two required inputs"
+inputs:
+  foo:
+    description: "First parameter (foo)"
+    required: true
+  bar:
+    description: "Second parameter (bar)"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"
+
+    - name: Run script.py
+      shell: bash
+      run: |
+        python script.py --foo "${{ inputs.foo }}" --bar "${{ inputs.bar }}"

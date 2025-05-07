@@ -13,8 +13,8 @@ on:
         required: true
 
   # (Optional) also run on push so you can test it via CI
-  push:
-    branches: [main]
+  # push:
+  #   branches: [main]
 
 jobs:
   run:

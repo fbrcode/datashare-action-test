@@ -1,6 +1,7 @@
 # .github/workflows/run-script.yml
 name: 🐍 Run Python Script
 
+# This enables manual dispatch
 on:
   workflow_dispatch:
     inputs:
@@ -11,20 +12,22 @@ on:
         description: "Second parameter (bar)"
         required: true
 
+  # (Optional) also run on push so you can test it via CI
+  push:
+    branches: [main]
+
 jobs:
   run:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
 
-      - name: Run script.py with inputs
+      - name: Run script.py
         run: |
           python script.py \
             --foo "${{ github.event.inputs.foo }}" \
